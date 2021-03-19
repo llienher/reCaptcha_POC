@@ -2,8 +2,6 @@
 POC using Google ReCaptcha v3 with simple Flask backend
 
 # Use
-=====
-
 First activate venv:
 `. venv/bin/activate`
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 import requests
 import json
 app = Flask(__name__)
@@ -16,10 +16,6 @@ def captcha():
         return render_template('captcha.html', data=data)
     else:
         return render_template('error.html')
-
-# @app.route('/data')
-# def data():
-#     return render_template('data.html')
 
 @app.route('/verify', methods=['POST'])
 def verify():
@@ -46,7 +42,6 @@ def verify():
     if response['success']:
         data['id'] = id
         data['value'] = 'donnée'
-        # redirect_url = url_for('data')
         return render_template('captcha.html', data=data)
     else:
         return render_template('captcha.html')

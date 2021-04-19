@@ -3,28 +3,42 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LdpX4QaAAAAAJJXqWva4DtrZX14nDQHyhtnNu7m"></script>
   </head>
   <body>
-    <button id="captcha">Captcha</button>
+    {% if data %}
+    <h1>id: {{ data.id }}</h1>
+    <p>data: {{ data.value }}</p>
+    <p>data: {{ data.value }}</p>
+    <p>data: {{ data.value }}</p>
+    {% endif %}
 
+    {% if not data %}
+    <button id="captcha">Captcha</button>
     <script>
       const btn= window.document.getElementById("captcha");
       btn.addEventListener('click', evt => onClick(evt));
+      var url_string = window.location.href;
+      var url = new URL(url_string);
+      var id = url.searchParams.get("id");
 
       function onClick(evt) {
         evt.preventDefault();
         grecaptcha.ready(() => {
-          grecaptcha.execute('6LdpX4QaAAAAAJJXqWva4DtrZX14nDQHyhtnNu7m', {action: 'submit'}).then((token) => {
+          grecaptcha.execute('<PUBLIC_KEY>', {action: 'submit'}).then((token) => {
             fetch('/verify', {
-              body: JSON.stringify(token),
+              body: JSON.stringify({
+                token,
+                id
+              }),
               method: 'post',
               redirect: 'follow',
             }).then(response => {
-              response.text().then(redirect_url => {
-                window.document.location.replace(redirect_url);
+              response.text().then(result => {
+                window.document.querySelector("html").innerHTML = result;
               })
             });
           });
         });
       }
     </script>
+    {% endif %}
   </body>
 </html>

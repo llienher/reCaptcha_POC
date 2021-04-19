@@ -22,7 +22,7 @@
       function onClick(evt) {
         evt.preventDefault();
         grecaptcha.ready(() => {
-          grecaptcha.execute('6LdpX4QaAAAAAJJXqWva4DtrZX14nDQHyhtnNu7m', {action: 'submit'}).then((token) => {
+          grecaptcha.execute('<PUBLIC_KEY>', {action: 'submit'}).then((token) => {
             fetch('/verify', {
               body: JSON.stringify({
                 token,

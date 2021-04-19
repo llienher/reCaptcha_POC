@@ -33,7 +33,7 @@ def verify():
     
     # FIXME: should be in yaml files
     verify_url = 'https://www.google.com/recaptcha/api/siteverify'
-    secret_key = '6LdpX4QaAAAAAOtH3ttoY9i7jnRxcP6tTflBJqvu'
+    secret_key = '<SECRET_KEY>'
 
     data = {'secret': secret_key, 'response': token}
     r = requests.get(verify_url, data)
